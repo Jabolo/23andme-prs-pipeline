@@ -237,8 +237,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--trait_id",
         type=str,
-        required=True,
-        help="Trait ID (e.g., EFO_0000305) to fetch associated PGS data from the PGS Catalog."
+        default="EFO_0000305",
+        help="Trait ID (e.g., EFO_0000305) to fetch associated PGS data from the PGS Catalog (default: EFO_0000305)."
     )
     parser.add_argument(
         "--threshold_low",
