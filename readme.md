@@ -5,11 +5,12 @@ This repository contains a pipeline for calculating a Polygenic Risk Score (PRS)
 ## Overview
 
 The pipeline performs the following steps:
+
 1. **Read Your Genotype Data:**  
    Reads your raw 23andMe file (a tab-separated file with columns: `rsid`, `chromosome`, `position`, and `genotype`).
 
 2. **Fetch Trait and Score Metadata:**  
-   Retrieves trait data and score metadata from the PGS Catalog using a specific trait ID.
+   Retrieves trait data and score metadata from the PGS Catalog using a specific trait ID. (A default trait ID is provided.)
 
 3. **Download and Parse the Scoring File:**  
    Downloads the scoring file (which contains effect sizes and risk alleles), decompresses it if necessary, and parses it.
@@ -53,17 +54,24 @@ Install the required Python packages with:
 pip install pandas requests numpy
 ```
 
-Getting Started
+# Getting Started
 
-1. Set Up Your Data
+1. **Set Up Your Data**
 
 Place your raw 23andMe genotype file (a tab-separated file with columns: rsid, chromosome, position, and genotype) into the data/ folder.
 
-2. Run the Pipeline
+2. **Run the Pipeline**
 
-Open your terminal, navigate to the project directory, and run:
+Open your terminal, navigate to the project directory, and run the pipeline by specifying the input file. The default trait ID (EFO_0000305) will be used if none is provided, and default thresholds are applied.
 
-```python pipeline.py```
+For example:
+```bash
+python pipeline.py --input_file data/23andMe_data.txt
+```
+Or, if you wish to override the default trait ID or thresholds:
+```bash
+python pipeline.py --input_file data/23andMe_data.txt --trait_id EFO_0000305 --threshold_low 50.0 --threshold_high 150.0
+```
 
 ### 3. Check the Output
 
@@ -73,8 +81,8 @@ After running the pipeline, check the following:
   A summary will be printed on the terminal, including the calculated PRS, risk category, and proprietary category.
 
 - **Results:**  
-  The full merged data (with all overlapping SNPs) is saved as a CSV file in the `results/` folder. The filename includes a timestamp (for example:  
-  `merged_data_20250210_092315.csv`).
+  The full merged data (with all overlapping SNPs) is saved as a CSV file in the `results/` folder. The filename includes a timestamp (for example, `merged_data_20250210_092315.csv`).
 
 - **Logs:**  
   Detailed logs of the pipeline’s execution are saved in the `log/` folder. Each log file includes a timestamp in its filename.
+
